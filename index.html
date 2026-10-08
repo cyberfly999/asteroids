@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1"/>
+	<title>Asteroids</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="ui">
+	<div id="score">Score: 0</div>
+	<div id="wave">Wave: 1</div>
+	<div id="lives">Lives: 3</div>
+	<div id="high">High: 0</div>
+	<button id="pause">Pause</button>
+	<button id="restart">New Game</button>
+</div>
+<div id="touch-controls">
+	<div class="touch-group touch-left">
+		<button id="touch-left" class="touch-btn" aria-label="Rotate Left">◀</button>
+		<button id="touch-right" class="touch-btn" aria-label="Rotate Right">▶</button>
+	</div>
+	<div class="touch-group touch-right">
+		<button id="touch-thrust" class="touch-btn" aria-label="Thrust">▲</button>
+		<button id="touch-fire" class="touch-btn touch-btn-fire" aria-label="Fire">●</button>
+	</div>
+</div>
+<canvas id="game"></canvas>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
