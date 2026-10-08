@@ -767,13 +767,23 @@ export default class AsteroidsGame {
 			ctx.save();
 			ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
 			ctx.fillRect(0, 0, w, h);
+
+			// Pulsating GAME OVER text
+			ctx.save();
+			const pulse = 1 + 0.08 * Math.sin(performance.now() / 200);
+			ctx.translate(w / 2, h / 2 - 40);
+			ctx.scale(pulse, pulse);
 			ctx.fillStyle = '#ff4444';
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'middle';
 			ctx.font = 'bold 48px system-ui, sans-serif';
-			ctx.fillText('GAME OVER', w / 2, h / 2 - 40);
-			ctx.font = '20px system-ui, sans-serif';
+			ctx.fillText('GAME OVER', 0, 0);
+			ctx.restore();
+
 			ctx.fillStyle = '#ffffff';
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			ctx.font = '20px system-ui, sans-serif';
 			ctx.fillText(`Final Score: ${this.score}`, w / 2, h / 2 + 10);
 			ctx.font = '16px system-ui, sans-serif';
 			ctx.fillStyle = '#aaaaaa';
