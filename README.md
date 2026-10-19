@@ -199,7 +199,7 @@ php -S localhost:8000
   this.canvas.height = h * dpr;
   this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ```
-- **Deterministic Starfield Optimization**: Background stars are generated into integer coordinate caches upon resize, avoiding per-frame pseudo-random calculations or subpixel rendering overhead.
+- **Randomized Starfield with Scaled Layout**: Background stars are randomized upon reload/start and precomputed into integer coordinates that scale consistently across viewport resizes, avoiding per-frame pseudo-random calculations or subpixel rendering overhead.
 - **Fail-Safe Persistence**: Safe `localStorage` getter and setter methods wrapped in `try...catch` blocks to support private browsing modes and sandboxed iframe environments.
 - **Memory & Resource Cleanups**: Complete `destroy()` method for removing event listeners and canceling `requestAnimationFrame` when embedding or tearing down the component.
 

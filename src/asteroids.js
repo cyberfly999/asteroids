@@ -290,6 +290,14 @@ export default class AsteroidsGame {
 		this.canvas = canvas;
 		this.ctx = canvas.getContext('2d');
 		this.stars = [];
+		// Generate randomized normalized star seeds on initialization (changes on reload)
+		this.starSeeds = [];
+		for (let i = 0; i < 80; i++) {
+			this.starSeeds.push({
+				x: Math.random(),
+				y: Math.random()
+			});
+		}
 
 		// Track currently pressed keys using a Set
 		this.keys = new Set();
@@ -500,7 +508,9 @@ export default class AsteroidsGame {
 	}
 
 	/**
-	 * Precomputes deterministic integer star coordinates to eliminate per-frame subpixel overhead.
+	 * Precomputes integer star coordinates from normalized relative coordinates.
+	 * Randomizes star positions per reload/instance while ensuring star positions
+	 * scale consistently without jumping during viewport resizes.
 	 * @param {number} w - Screen width.
 	 * @param {number} h - Screen height.
 	 */
@@ -508,10 +518,20 @@ export default class AsteroidsGame {
 		this.stars = [];
 		const safeW = Math.max(1, w);
 		const safeH = Math.max(1, h);
-		for (let i = 0; i < 80; i++) {
+		if (!this.starSeeds || this.starSeeds.length === 0) {
+			this.starSeeds = [];
+			for (let i = 0; i < 80; i++) {
+				this.starSeeds.push({
+					x: Math.random(),
+					y: Math.random()
+				});
+			}
+		}
+		for (let i = 0; i < this.starSeeds.length; i++) {
+			const s = this.starSeeds[i];
 			this.stars.push({
-				x: Math.floor((i * 137.5) % safeW),
-				y: Math.floor((i * 73.3) % safeH)
+				x: Math.floor(s.x * safeW),
+				y: Math.floor(s.y * safeH)
 			});
 		}
 	}
